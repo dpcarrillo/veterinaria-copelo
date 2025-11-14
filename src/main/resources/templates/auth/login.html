@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>🐾 Veterinaria Copelo</h1>
+                <p>Inicia sesión en tu cuenta</p>
+            </div>
+            
+            <!-- Mensajes de error/success -->
+            <div th:if="${param.error}" class="alert alert-error">
+                <span th:text="${param.error}">Error</span>
+            </div>
+            <div th:if="${param.success}" class="alert alert-success">
+                <span th:text="${param.success}">Success</span>
+            </div>
+            
+            <form th:action="@{/auth/login}" method="post" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required class="form-control" 
+                           placeholder="tu@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required class="form-control" 
+                           placeholder="Tu contraseña">
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">🔐 Iniciar Sesión</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>¿No tienes cuenta? <a th:href="@{/auth/registro}">Regístrate aquí</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
