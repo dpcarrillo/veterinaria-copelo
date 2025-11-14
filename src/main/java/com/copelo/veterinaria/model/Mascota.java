@@ -24,7 +24,7 @@ public class Mascota {
     private LocalDate fechaNacimiento;
     
     @Column(nullable = false)
-    private String sexo; // MACHO, HEMBRA
+    private String sexo;
     
     private String color;
     
@@ -34,17 +34,16 @@ public class Mascota {
     private String observaciones;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dueno_id", nullable = false)
-    private Dueno dueno;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
     
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cita> citas = new ArrayList<>();
     
-    // Constructores
     public Mascota() {}
     
     public Mascota(String nombre, String especie, String raza, LocalDate fechaNacimiento, 
-                  String sexo, String color, Double peso, Dueno dueno) {
+                  String sexo, String color, Double peso, Usuario usuario) {
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
@@ -52,10 +51,9 @@ public class Mascota {
         this.sexo = sexo;
         this.color = color;
         this.peso = peso;
-        this.dueno = dueno;
+        this.usuario = usuario;
     }
     
-    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
@@ -83,15 +81,19 @@ public class Mascota {
     public String getObservaciones() { return observaciones; }
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
     
-    public Dueno getDueno() { return dueno; }
-    public void setDueno(Dueno dueno) { this.dueno = dueno; }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
     
     public List<Cita> getCitas() { return citas; }
     public void setCitas(List<Cita> citas) { this.citas = citas; }
     
-    // Método auxiliar para calcular edad
     public Integer getEdad() {
         if (fechaNacimiento == null) return null;
         return LocalDate.now().getYear() - fechaNacimiento.getYear();
+    }
+
+    public void setDueno(Dueno dueno) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setDueno'");
     }
 }

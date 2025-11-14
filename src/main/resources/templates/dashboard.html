@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>🐾 Panel de Control</h1>
+            <p>Bienvenido al sistema de Veterinaria Copelo</p>
+        </header>
+        
+        <main>
+            <div class="grid">
+                <div class="card">
+                    <h3>👤 Mi Perfil</h3>
+                    <p>Gestiona tu información personal</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🐶 Mis Mascotas</h3>
+                    <p>Administra tus mascotas registradas</p>
+                    <span class="badge">Próximamente</span>
+                </div>
+                
+                <div class="card">
+                    <h3>📅 Mis Citas</h3>
+                    <p>Gestiona tus citas veterinarias</p>
+                    <span class="badge">Próximamente</span>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3>✅ FASE 1 COMPLETADA</h3>
+                <ul>
+                    <li>✔️ Sistema de autenticación funcionando</li>
+                    <li>✔️ Registro e inicio de sesión</li>
+                    <li>✔️ Base de datos PostgreSQL en la nube</li>
+                    <li>✔️ Datos persistentes entre sesiones</li>
+                    <li>🔄 Próximo: Sistema de sesiones y CRUD por usuario</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo - Fase 1: Autenticación</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -8,13 +8,11 @@ public class HomeController {
     
     @GetMapping("/")
     public String home() {
-        // Redirigir directamente a la página de login
         return "redirect:/auth/login";
     }
     
     @GetMapping("/dashboard")
     public String dashboard() {
-        // Aquí irá el dashboard después del login
         return "dashboard";
     }
 }
