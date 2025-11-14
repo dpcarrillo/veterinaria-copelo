@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${dueno.id != null} ? 'Editar Dueño' : 'Nuevo Dueño'">Formulario Dueño - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1 th:text="${dueno.id != null} ? '✏️ Editar Dueño' : '👥 Nuevo Dueño'">Formulario Dueño</h1>
+            <p th:text="${dueno.id != null} ? 'Modifica los datos del dueño' : 'Registra un nuevo dueño'">Formulario de dueño</p>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="/">Inicio</a> > 
+            <a href="/duenos">Dueños</a> > 
+            <span th:text="${dueno.id != null} ? 'Editar' : 'Nuevo'">Formulario</span>
+        </nav>
+        
+        <main>
+            <div class="card">
+                <form th:action="@{/duenos/guardar}" th:object="${dueno}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" th:field="*{apellido}" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" th:field="*{email}" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" id="telefono" th:field="*{telefono}" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <textarea id="direccion" th:field="*{direccion}" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">💾 Guardar</button>
+                        <a th:href="@{/duenos}" class="btn btn-secondary">❌ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo</p>
+        </footer>
+    </div>
+</body>
+</html>

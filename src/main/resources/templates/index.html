@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>🐾 Veterinaria Copelo</h1>
+            <p th:text="${mensaje}">Mensaje de bienvenida</p>
+        </header>
+        
+        <main>
+            <div class="dashboard">
+                <h2>🏠 Panel de Control</h2>
+                <div class="grid">
+                    <a href="/duenos" class="card-link">
+                        <div class="card">
+                            <h3>👥 Dueños</h3>
+                            <p>Gestionar dueños de mascotas</p>
+                            <span class="badge">CRUD Completo</span>
+                        </div>
+                    </a>
+                    
+                    <a href="/mascotas" class="card-link">
+                        <div class="card">
+                            <h3>🐶 Mascotas</h3>
+                            <p>Administrar mascotas registradas</p>
+                            <span class="badge">CRUD Completo</span>
+                        </div>
+                    </a>
+                    
+                    <a href="/citas" class="card-link">
+                        <div class="card">
+                            <h3>📅 Citas</h3>
+                            <p>Programar y gestionar citas</p>
+                            <span class="badge">CRUD Completo</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="info-section">
+                    <h3>✅ Fase 2 Completada</h3>
+                    <ul>
+                        <li>✔️ Entidades creadas (Dueño, Mascota, Cita)</li>
+                        <li>✔️ Repositorios JPA configurados</li>
+                        <li>✔️ Controladores implementados</li>
+                        <li>✔️ Base de datos H2 funcionando</li>
+                        <li>✔️ Datos de prueba cargados</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo - Fase 2: Entidades y CRUD</p>
+        </footer>
+    </div>
+</body>
+</html>

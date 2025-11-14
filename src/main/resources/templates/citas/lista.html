@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>📅 Gestión de Citas</h1>
+            <p>Programa y administra las citas veterinarias</p>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="/">Inicio</a> > Citas
+        </nav>
+        
+        <main>
+            <div class="actions">
+                <a th:href="@{/citas/nuevo}" class="btn btn-primary">➕ Nueva Cita</a>
+            </div>
+            
+            <div class="card">
+                <h2>Lista de Citas Programadas</h2>
+                
+                <div th:if="${citas.empty}" class="empty-state">
+                    <p>No hay citas programadas.</p>
+                </div>
+                
+                <table th:unless="${citas.empty}" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Mascota</th>
+                            <th>Dueño</th>
+                            <th>Tipo</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cita : ${citas}">
+                            <td th:text="${#temporals.format(cita.fechaHora, 'dd/MM/yyyy HH:mm')}">20/12/2024 10:00</td>
+                            <td>
+                                <strong th:text="${cita.mascota.nombre}">Max</strong>
+                                <br>
+                                <small th:text="${cita.mascota.especie}">PERRO</small>
+                            </td>
+                            <td th:text="${cita.mascota.dueno.nombreCompleto}">María Gonzalez</td>
+                            <td>
+                                <span class="badge" th:text="${cita.tipo}">CONSULTA</span>
+                            </td>
+                            <td th:text="${cita.motivo}">Chequeo anual</td>
+                            <td>
+                                <span th:classappend="${cita.estado == 'PROGRAMADA'} ? 'badge' :
+                                                      ${cita.estado == 'COMPLETADA'} ? 'badge badge-completed' :
+                                                      'badge badge-cancelled'"
+                                      th:text="${cita.estado}">PROGRAMADA</span>
+                            </td>
+                            <td class="actions">
+                                <a th:href="@{/citas/editar/{id}(id=${cita.id})}" class="btn btn-edit">✏️ Editar</a>
+                                <a th:href="@{/citas/eliminar/{id}(id=${cita.id})}" class="btn btn-delete" onclick="return confirm('¿Estás seguro de eliminar esta cita?')">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo</p>
+        </footer>
+    </div>
+</body>
+</html>

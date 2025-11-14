@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${mascota.id != null} ? 'Editar Mascota' : 'Nueva Mascota'">Formulario Mascota - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1 th:text="${mascota.id != null} ? '✏️ Editar Mascota' : '🐶 Nueva Mascota'">Formulario Mascota</h1>
+            <p th:text="${mascota.id != null} ? 'Modifica los datos de la mascota' : 'Registra una nueva mascota'">Formulario de mascota</p>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="/">Inicio</a> > 
+            <a href="/mascotas">Mascotas</a> > 
+            <span th:text="${mascota.id != null} ? 'Editar' : 'Nueva'">Formulario</span>
+        </nav>
+        
+        <main>
+            <div class="card">
+                <form th:action="@{/mascotas/guardar}" th:object="${mascota}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre de la Mascota:</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="especie">Especie:</label>
+                        <select id="especie" th:field="*{especie}" required class="form-control">
+                            <option value="">Selecciona una especie</option>
+                            <option value="PERRO">Perro</option>
+                            <option value="GATO">Gato</option>
+                            <option value="AVE">Ave</option>
+                            <option value="ROEDOR">Roedor</option>
+                            <option value="REPTIL">Reptil</option>
+                            <option value="OTRO">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="raza">Raza:</label>
+                        <input type="text" id="raza" th:field="*{raza}" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                        <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sexo">Sexo:</label>
+                        <select id="sexo" th:field="*{sexo}" required class="form-control">
+                            <option value="">Selecciona sexo</option>
+                            <option value="MACHO">Macho</option>
+                            <option value="HEMBRA">Hembra</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="color">Color:</label>
+                        <input type="text" id="color" th:field="*{color}" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="peso">Peso (kg):</label>
+                        <input type="number" id="peso" th:field="*{peso}" step="0.1" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dueno">Dueño:</label>
+                        <select id="dueno" name="duenoId" required class="form-control">
+                            <option value="">Selecciona un dueño</option>
+                            <option th:each="dueno : ${duenos}" 
+                                    th:value="${dueno.id}" 
+                                    th:text="${dueno.nombreCompleto}"
+                                    th:selected="${mascota.dueno != null and mascota.dueno.id == dueno.id}">
+                            </option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="observaciones">Observaciones:</label>
+                        <textarea id="observaciones" th:field="*{observaciones}" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">💾 Guardar</button>
+                        <a th:href="@{/mascotas}" class="btn btn-secondary">❌ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo</p>
+        </footer>
+    </div>
+</body>
+</html>

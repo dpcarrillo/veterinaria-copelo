@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>🐶 Gestión de Mascotas</h1>
+            <p>Administra las mascotas registradas</p>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="/">Inicio</a> > Mascotas
+        </nav>
+        
+        <main>
+            <div class="actions">
+                <a th:href="@{/mascotas/nuevo}" class="btn btn-primary">➕ Nueva Mascota</a>
+            </div>
+            
+            <div class="card">
+                <h2>Lista de Mascotas</h2>
+                
+                <div th:if="${mascotas.empty}" class="empty-state">
+                    <p>No hay mascotas registradas.</p>
+                </div>
+                
+                <table th:unless="${mascotas.empty}" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Especie</th>
+                            <th>Raza</th>
+                            <th>Edad</th>
+                            <th>Dueño</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="mascota : ${mascotas}">
+                            <td th:text="${mascota.nombre}">Max</td>
+                            <td>
+                                <span class="badge" th:text="${mascota.especie}">PERRO</span>
+                            </td>
+                            <td th:text="${mascota.raza}">Labrador</td>
+                            <td th:text="${mascota.edad} + ' años'">4 años</td>
+                            <td th:text="${mascota.dueno.nombreCompleto}">María Gonzalez</td>
+                            <td class="actions">
+                                <a th:href="@{/mascotas/editar/{id}(id=${mascota.id})}" class="btn btn-edit">✏️ Editar</a>
+                                <a th:href="@{/mascotas/eliminar/{id}(id=${mascota.id})}" class="btn btn-delete" onclick="return confirm('¿Estás seguro?')">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo</p>
+        </footer>
+    </div>
+</body>
+</html>

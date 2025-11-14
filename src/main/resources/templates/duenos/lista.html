@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dueños - Veterinaria Copelo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>👥 Gestión de Dueños</h1>
+            <p>Administra los dueños de las mascotas</p>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="/">Inicio</a> > Dueños
+        </nav>
+        
+        <main>
+            <div class="actions">
+                <a th:href="@{/duenos/nuevo}" class="btn btn-primary">➕ Nuevo Dueño</a>
+            </div>
+            
+            <div class="card">
+                <h2>Lista de Dueños</h2>
+                
+                <div th:if="${duenos.empty}" class="empty-state">
+                    <p>No hay dueños registrados.</p>
+                </div>
+                
+                <table th:unless="${duenos.empty}" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Mascotas</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dueno : ${duenos}">
+                            <td th:text="${dueno.id}">1</td>
+                            <td th:text="${dueno.nombreCompleto}">Juan Pérez</td>
+                            <td th:text="${dueno.email}">juan@email.com</td>
+                            <td th:text="${dueno.telefono}">555-1234</td>
+                            <td>
+                                <span class="badge" th:text="${dueno.mascotas.size()}">2</span>
+                            </td>
+                            <td class="actions">
+                                <a th:href="@{/duenos/editar/{id}(id=${dueno.id})}" class="btn btn-edit">✏️ Editar</a>
+                                <a th:href="@{/duenos/eliminar/{id}(id=${dueno.id})}" class="btn btn-delete" onclick="return confirm('¿Estás seguro?')">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Veterinaria Copelo</p>
+        </footer>
+    </div>
+</body>
+</html>
